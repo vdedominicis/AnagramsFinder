@@ -33,32 +33,32 @@ public class AnagramsUtils {
 		//value 1, even if it is not a prime number, 
 		//is used to represent the empty or non-esisting word
 		lettersValues = new HashMap<Character, Long>();
-		lettersValues.put('a', new Long(2));
-		lettersValues.put('b', new Long(3));
-		lettersValues.put('c', new Long(5));
-		lettersValues.put('d', new Long(7));
-		lettersValues.put('e', new Long(11));
-		lettersValues.put('f', new Long(13));
-		lettersValues.put('g', new Long(17));
-		lettersValues.put('h', new Long(19));
-		lettersValues.put('i', new Long(23));
-		lettersValues.put('j', new Long(29));
-		lettersValues.put('k', new Long(31));
-		lettersValues.put('l', new Long(37));
-		lettersValues.put('m', new Long(41));
-		lettersValues.put('n', new Long(43));
-		lettersValues.put('o', new Long(47));
-		lettersValues.put('p', new Long(53));
-		lettersValues.put('q', new Long(59));
-		lettersValues.put('r', new Long(61));
-		lettersValues.put('s', new Long(67));
-		lettersValues.put('t', new Long(71));
-		lettersValues.put('u', new Long(73));
-		lettersValues.put('v', new Long(79));
-		lettersValues.put('x', new Long(83));
-		lettersValues.put('y', new Long(89));
-		lettersValues.put('w', new Long(97));
-		lettersValues.put('z', new Long(101));
+		lettersValues.put('a', (long) 2);
+		lettersValues.put('b', (long)3);
+		lettersValues.put('c', (long)5);
+		lettersValues.put('d', (long)7);
+		lettersValues.put('e', (long)11);
+		lettersValues.put('f', (long)13);
+		lettersValues.put('g', (long)17);
+		lettersValues.put('h', (long)19);
+		lettersValues.put('i', (long)23);
+		lettersValues.put('j', (long)29);
+		lettersValues.put('k', (long)31);
+		lettersValues.put('l', (long)37);
+		lettersValues.put('m', (long)41);
+		lettersValues.put('n', (long)43);
+		lettersValues.put('o', (long)47);
+		lettersValues.put('p', (long)53);
+		lettersValues.put('q', (long)59);
+		lettersValues.put('r', (long)61);
+		lettersValues.put('s', (long)67);
+		lettersValues.put('t', (long)71);
+		lettersValues.put('u', (long)73);
+		lettersValues.put('v', (long)79);
+		lettersValues.put('x', (long)83);
+		lettersValues.put('y', (long)89);
+		lettersValues.put('w', (long)97);
+		lettersValues.put('z', (long)101);
 	}
 	
 	/**
@@ -72,7 +72,7 @@ public class AnagramsUtils {
 	 */
 	public Long getValue(String word) {
 
-		Long wordValue = new Long(1);
+		Long wordValue = (long)1;
 		
 		//1 represent the empty (word = "") or non-existing (word == null) words. They are both invalid
 		if(word == null)
