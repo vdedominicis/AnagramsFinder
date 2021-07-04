@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
+import javax.naming.directory.InvalidAttributesException;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -17,19 +19,20 @@ import org.apache.log4j.Logger;
  * @author Valerio De Dominicis
  * @version 1.0
  */
-public class AnagramsUtils {
+class AnagramsUtils extends UtilsWithLogger{
 	
-	private Logger logger = null;
+	
 	//This map is initialized only once when an instance of AnagramUtils is created. It provides
 	//the prime number associated to each letter in the alphabet
 	private Map<Character, Long> lettersValues;
 	
 	/**
 	 * Default constructor. It initialize the state of the instance
+	 * @throws InvalidAttributesException If the logger is null
 	 */
-	public AnagramsUtils(Logger logger) {
+	public AnagramsUtils(Logger logger) throws InvalidAttributesException {
 		
-		this.logger = logger;
+		super(logger);
 		
 		//We associate to each letter a different prime number. 
 		//value 1, even if it is not a prime number, 

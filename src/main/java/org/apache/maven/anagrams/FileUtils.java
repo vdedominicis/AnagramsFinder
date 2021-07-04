@@ -8,6 +8,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
+
+import javax.naming.directory.InvalidAttributesException;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -18,17 +21,17 @@ import org.apache.log4j.Logger;
  * @author Valerio De Dominicis
  * @version 1.0
  */
-public class FileUtils {
+class FileUtils extends UtilsWithLogger{
 	
 	private static final String PROPERTIES_FILE_NAME = "anagram.properties";
 	private static final String PROPERTIES_PATH = System.getProperty("user.dir");
-	private Logger logger = null;
 	
 	/**
 	 * Default constructor. It initialize the instance
+	 * @throws InvalidAttributesException If the logger is null
 	 */
-	public FileUtils(Logger logger) {
-		this.logger = logger;
+	public FileUtils(Logger logger) throws InvalidAttributesException {
+		super(logger);
 	}
 	
 	/**

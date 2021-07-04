@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
+import javax.naming.directory.InvalidAttributesException;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -23,15 +25,17 @@ public class AnagramsFinder {
 	 * The launcher of the program.
 	 * 
 	 * @param args no arguments are required
+	 * @throws InvalidAttributesException InvalidAttributesException if the logger cannot be initialized
 	 */
-	public static void main(String args[]) {
+	public static void main(String args[]) throws InvalidAttributesException {
 		new AnagramsFinder().start();
 	}
 	
 	/**
 	 * Default constructor. It initialize the instance
+	 * @throws InvalidAttributesException if the logger cannot be initialized
 	 */
-	public AnagramsFinder() {
+	public AnagramsFinder () throws InvalidAttributesException {
 		this.logger = LogManager.getLogger("debugLogger");
 		this.anagramsUtils = new AnagramsUtils(logger);
 		this.fileUtils = new FileUtils(logger);

@@ -23,7 +23,7 @@ public class AnagramsUtilsTest {
 	private AnagramsUtils anagramUtils = null;
 	
 	/**
-	 * Initializator of the instance of AnagramsUtils on whom we will run the tests
+	 * Initializer of the instance of AnagramsUtils on whom we will run the tests
 	 * @throws Exception
 	 */
 	@Before
