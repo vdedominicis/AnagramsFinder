@@ -63,7 +63,7 @@ public class FileUtilsTest {
 	/**
 	 * We verify that the fileUtils instance throws an exception in case we try to read an unexisting file
 	 * 
-	 * @throws FileNotFoundException This exception is expected to be thrown becase we are using a wrong file name to test the method
+	 * @throws FileNotFoundException This exception is expected to be thrown because we are using a wrong file name to test the method
 	 */
 	@Test (expected = FileNotFoundException.class)
 	public void wordsFileShouldNotBeFound() throws FileNotFoundException  {
