@@ -6,10 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
-
 import javax.naming.directory.InvalidAttributesException;
-
-import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 /**
