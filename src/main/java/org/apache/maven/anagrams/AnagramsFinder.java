@@ -32,9 +32,9 @@ public class AnagramsFinder {
 	 * Default constructor. It initialize the instance
 	 */
 	public AnagramsFinder() {
-		this.anagramsUtils = new AnagramsUtils();
-		this.fileUtils = new FileUtils();
 		this.logger = LogManager.getLogger("debugLogger");
+		this.anagramsUtils = new AnagramsUtils(logger);
+		this.fileUtils = new FileUtils(logger);
 	}
 	
 	/**

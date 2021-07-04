@@ -27,8 +27,8 @@ public class FileUtils {
 	/**
 	 * Default constructor. It initialize the instance
 	 */
-	public FileUtils() {
-		this.logger = LogManager.getLogger("debugLogger");
+	public FileUtils(Logger logger) {
+		this.logger = logger;
 	}
 	
 	/**

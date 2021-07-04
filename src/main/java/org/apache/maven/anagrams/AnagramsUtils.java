@@ -27,9 +27,9 @@ public class AnagramsUtils {
 	/**
 	 * Default constructor. It initialize the state of the instance
 	 */
-	public AnagramsUtils() {
+	public AnagramsUtils(Logger logger) {
 		
-		this.logger = LogManager.getLogger("debugLogger");
+		this.logger = logger;
 		
 		//We associate to each letter a different prime number. 
 		//value 1, even if it is not a prime number, 

@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.log4j.LogManager;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,7 +28,7 @@ public class AnagramsUtilsTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		anagramUtils = new AnagramsUtils();
+		anagramUtils = new AnagramsUtils(LogManager.getLogger("testLogger"));
 	}
 	
 	/**
@@ -53,6 +55,26 @@ public class AnagramsUtilsTest {
 		assertEquals((long)30, anagramUtils.getValue("abc").longValue());
 	}
 
+
+	/**
+	 * In case there are no words, no exeptions are thrown
+	 */
+	@Test
+	public void noExceptionAreThrownIfNoWordsAreProvided() {
+		assertEquals(0, anagramUtils.findAnagrams(null).size());
+	}
+	
+	/**
+	 * The empty word is skipped
+	 */
+	@Test
+	public void theEmptyWordIsSkipped() {
+		List<String> words = new LinkedList<String>();
+		words.add("");
+		words.add(null);
+		assertEquals(0, anagramUtils.findAnagrams(words).size());
+	}
+	
 	/**
 	 * We test that the anagrams groups are build properly providing well known sets of anagrams.
 	 * This test verify the number of anagrams groups that the program build and compare it to the expected value.
