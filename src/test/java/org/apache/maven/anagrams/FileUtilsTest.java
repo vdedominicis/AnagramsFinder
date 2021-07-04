@@ -1,5 +1,6 @@
 package org.apache.maven.anagrams;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -26,7 +27,7 @@ public class FileUtilsTest {
 	private FileUtils fileUtils = null;
 	
 	/**
-	 * Initializator of the instance of FileUtils on whom we will run the tests
+	 * Initializer of the instance of FileUtils on whom we will run the tests
 	 * @throws Exception
 	 */
 	@Before
@@ -67,53 +68,28 @@ public class FileUtilsTest {
 	 * 
 	 * @throws FileNotFoundException This exception is expected to be thrown because we are using a wrong file name to test the method
 	 */
-	//@Test (expected = FileNotFoundException.class)
+	@Test (expected = FileNotFoundException.class)
 	public void wordsFileShouldNotBeFound() throws FileNotFoundException  {
-		assertNull(fileUtils.readFile(fileUtils.getPropertiesPath() + "/fakeFile.txt"));
+		String fakeFilePath = fileUtils.getPropertiesPath() + "/fakeFile.txt";
+		fileUtils.readFile(fakeFilePath);
 	}
 	
 	/**
 	 * We verify that the fileUtils instance throws an exception in case we try to read a null file
 	 */
 	@Test (expected = NullPointerException.class)
-	public void nullWordsFilenameShouldRaiseException() {
-		try { 
-			assertNull(fileUtils.readFile(null)); 
-		} 
-		catch (IOException ex) { 
-			ex.printStackTrace();
-			fail("Exception while reading the null file"); 
-		}
+	public void nullWordsFilenameShouldRaiseException() throws FileNotFoundException {
+			fileUtils.readFile(null); 
 	}
 	
 	/**
 	 * We test that the words were read properly from the file
 	 */
 	@Test
-	public void wordsFileShouldBeRead1()  {
-		try {
-			List<String> readWords = fileUtils.readFile(fileUtils.getWordFilePath());
-			assertNotNull(readWords);
-		}
-		catch (NullPointerException | IOException ex) {
-			ex.printStackTrace();
-			fail("Exception while reading the file name in path"); 
-		}
-	}
-	
-	/**
-	 * We test that the words were read properly from the file
-	 */
-	@Test
-	public void wordsFileShouldBeRead2()  {
-		try {
-			List<String> readWords = fileUtils.readFile(fileUtils.getWordFilePath());
-			assertTrue(readWords.size() > 0);
-		}
-		catch (NullPointerException | IOException ex) {
-			ex.printStackTrace();
-			fail("Exception while reading the file name"); 
-		}
+	public void wordsFileShouldBeRead() throws FileNotFoundException, NullPointerException, IOException  {
+		List<String> readWords = fileUtils.readFile(fileUtils.getWordFilePath());
+		assertNotNull(readWords);
+		assertNotEquals(0, readWords.size());
 	}
 	
 }

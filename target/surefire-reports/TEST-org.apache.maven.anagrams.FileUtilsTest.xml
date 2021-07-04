@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="org.apache.maven.anagrams.FileUtilsTest" time="0.029" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="org.apache.maven.anagrams.FileUtilsTest" time="0.016" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="16.0.1+9-24"/>
@@ -60,9 +60,9 @@
     <property name="sun.stdout.encoding" value="cp850"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="org.apache.maven.anagrams.FileUtilsTest" name="nullWordsFilenameShouldRaiseException" time="0.001"/>
-  <testcase classname="org.apache.maven.anagrams.FileUtilsTest" name="wordsFileNameShouldNotBeNull" time="0.007"/>
-  <testcase classname="org.apache.maven.anagrams.FileUtilsTest" name="wordsFileNameShouldBeRead" time="0.008"/>
-  <testcase classname="org.apache.maven.anagrams.FileUtilsTest" name="wordsFileShouldBeRead1" time="0.011"/>
-  <testcase classname="org.apache.maven.anagrams.FileUtilsTest" name="wordsFileShouldBeRead2" time="0.002"/>
+  <testcase classname="org.apache.maven.anagrams.FileUtilsTest" name="wordsFileShouldNotBeFound" time="0"/>
+  <testcase classname="org.apache.maven.anagrams.FileUtilsTest" name="nullWordsFilenameShouldRaiseException" time="0"/>
+  <testcase classname="org.apache.maven.anagrams.FileUtilsTest" name="wordsFileNameShouldNotBeNull" time="0.001"/>
+  <testcase classname="org.apache.maven.anagrams.FileUtilsTest" name="wordsFileNameShouldBeRead" time="0.002"/>
+  <testcase classname="org.apache.maven.anagrams.FileUtilsTest" name="wordsFileShouldBeRead" time="0.013"/>
 </testsuite>
