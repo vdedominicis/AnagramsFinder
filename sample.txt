@@ -5,3 +5,6 @@ race
 care
 acre
 bee
+anagram
+aragman
+whatever
