@@ -11,65 +11,56 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * The test class for the AnagramsUtils Class.
- * It tests all AnagramsUtils methods in different scenarios.
- * 
  * @author valerio
  * @version 1.0
  */
 public class AnagramsUtilsTest {
 	
-	//The instance to be testes
 	private AnagramsUtils anagramUtils = null;
 	
-	/**
-	 * Initializer of the instance of AnagramsUtils on whom we will run the tests
-	 * @throws Exception
-	 */
 	@Before
 	public void setUp() throws Exception {
 		anagramUtils = new AnagramsUtils(LogManager.getLogger("testLogger"));
 	}
 	
 	/**
-	 * We test that the word value is calculated properly for the empty word
+	 * The word value is calculated properly for the empty word
 	 */
 	@Test
-	public void getWordValueTestEmptyWord() {
+	public void getValue_emptyWord() {
 		assertEquals((long)1, anagramUtils.getValue("").longValue());
 	}
 	
 	/**
-	 * We test that the word value is calculated properly for the null word
+	 * The word value is calculated properly for the null word
 	 */
 	@Test
-	public void getWordValueTestNullWord() {
+	public void getValue_nullWord() {
 		assertEquals((long)1, anagramUtils.getValue(null).longValue());
 	}
 	
 	/**
-	 * We test that the word value is calculated properly for an arbitrary word
+	 * The word value is calculated properly for an arbitrary word
 	 */
 	@Test
-	public void getWordValueTestArbitraryWord() {
+	public void getValue_arbitraryWord() {
 		assertEquals((long)30, anagramUtils.getValue("abc").longValue());
 	}
 
-
 	/**
-	 * In case there are no words, no exeptions are thrown
+	 * In case there are no words, no exceptions are thrown
 	 */
 	@Test
-	public void noExceptionAreThrownIfNoWordsAreProvided() {
+	public void findAnagrams_noExceptionAreThrownIfNoWordsAreProvided() {
 		assertEquals(0, anagramUtils.findAnagrams(null).size());
 		assertEquals(0, anagramUtils.findAnagrams(new LinkedList<String>()).size());
 	}
 	
 	/**
-	 * The empty word is skipped
+	 * The invalid words (empty or null) are skipped while searching for anagrams
 	 */
 	@Test
-	public void theEmptyWordIsSkipped() {
+	public void findAnagrams_theInvalidWordAreSkipped() {
 		List<String> words = new LinkedList<String>();
 		words.add("");
 		words.add(null);
@@ -77,13 +68,11 @@ public class AnagramsUtilsTest {
 	}
 	
 	/**
-	 * We test that the anagrams groups are build properly providing well known sets of anagrams.
+	 * The anagrams groups are build properly providing well known sets of anagrams.
 	 * This test verify the number of anagrams groups that the program build and compare it to the expected value.
-	 * Because we are using well known sets of anagrams we can predict for each step how many anagrams groups should be returned from the program
-	 * and what each group must contain
 	 */
 	@Test
-	public void anagramsGroupShouldBeCreated() {
+	public void findAnagrams_anagramsAreSpotted() {
 		List<String> words = new LinkedList<String>();
 
 		//Only one word - 1 group
@@ -101,17 +90,17 @@ public class AnagramsUtilsTest {
 		//Anagram of "dawn" - Still 3 groups
 		words.add("wand");
 		assertEquals(3, anagramUtils.findAnagrams(words).size());
-		//We remove the only word with no anagrams - 2 groups
+		//The only word with no anagrams is removed - 2 groups
 		words.remove("sword");
 		assertEquals(2, anagramUtils.findAnagrams(words).size());
-		//We remove 2 words which are mutual anagrams - 1 group
+		//2 words which are mutual anagrams are removed - 1 group
 		words.remove("drow");
 		words.remove("word");
 		assertEquals(1, anagramUtils.findAnagrams(words).size());
 	}
 		
 	/**
-	 * We test if all anagrams in a group are concatenated together properly in only one string
+	 * All anagrams in a group are concatenated together properly in a string with the specified separator
 	 */
 	@Test
 	public void anagramSholdBeConcatenated(){
@@ -119,7 +108,7 @@ public class AnagramsUtilsTest {
 		words.add("race");
 		words.add("care");
 		words.add("acre");
-		assertEquals("race,care,acre", anagramUtils.toString(words));
+		assertEquals("race,care,acre", anagramUtils.toString(words, ","));
 	}
 	
 }

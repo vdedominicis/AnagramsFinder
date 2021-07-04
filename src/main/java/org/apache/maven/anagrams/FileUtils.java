@@ -12,8 +12,7 @@ import javax.naming.directory.InvalidAttributesException;
 import org.apache.log4j.Logger;
 
 /**
- * This class is a toolset to interact with the configuration and the words files.
- * It contains the methods to retrieve the file name and to read its content
+ * This class is a toolbox to interact with the configuration and the file contaiing the words.
  * 
  * @author Valerio De Dominicis
  * @version 1.0
@@ -24,7 +23,6 @@ class FileUtils extends UtilsWithLogger{
 	private static final String PROPERTIES_PATH = System.getProperty("user.dir");
 	
 	/**
-	 * Default constructor. It initialize the instance
 	 * @throws InvalidAttributesException If the logger is null
 	 */
 	public FileUtils(Logger logger) throws InvalidAttributesException {
@@ -32,15 +30,11 @@ class FileUtils extends UtilsWithLogger{
 	}
 	
 	/**
-	 * Returns the name of the file containing the words we want to process.
-	 * This name may be configured in the anagram.properties file
-	 * 
-	 * @return The name of the file with the words we want to process
-	 * @throws IOException If anagram.properties file is not found
+	 * Returns the name of the file containing the words. This name can be configured in the anagram.properties file
+	 * @throws IOException If the .properties file is not found
 	 */
-	public String getFileName() throws IOException {
+	String getFileName() throws IOException {
 		logger.debug("FileUtils - getFileName - Looking for the configuration file: " + PROPERTIES_PATH + "/" + PROPERTIES_FILE_NAME);
-		//We try to read the name of the words file from anagram.properties
 		Properties configFile = new Properties();
 		configFile.load(new FileInputStream(PROPERTIES_PATH + "/" + PROPERTIES_FILE_NAME));
 		logger.debug("FileUtils - getFileName - Getting the file name from the configuration file");
@@ -48,12 +42,10 @@ class FileUtils extends UtilsWithLogger{
 	}
 	
 	/**
-	 * Returns the path of the file containing the words we want to process.
-	 * 
-	 * @return The path of the file with the words we want to process
-	 * @throws IOException If .properties file is not found
+	 * Returns the path of the file containing the words.
+	 * @throws IOException If the .properties file is not found
 	 */
-	public String getWordFilePath() throws IOException {
+	public String getWordsFilePath() throws IOException {
 		String fileName = this.getFileName();
 		logger.debug("FileUtils - getWordFilePath - Getting the word file path " + PROPERTIES_PATH + "/" + fileName);
 		return PROPERTIES_PATH + "/" + fileName;
@@ -62,16 +54,15 @@ class FileUtils extends UtilsWithLogger{
 	/**
 	 * Returns the words read from the file.
 	 * 
-	 * @param fileName The name of the file containing the words
+	 * @param filePath The path of the file containing the words
 	 * @return A list of string representing the words read from the file
 	 * @throws FileNotFoundException If the words file is not found
-	 * @throws NullPointerException If the filename is null
+	 * @throws NullPointerException If the filePath is null
 	 */
 	public List<String> readFile(String filePath) throws FileNotFoundException, NullPointerException {
         List<String> words = new LinkedList<String>();
         
         logger.debug("FileUtils - readFile - Reading the words in the file " + filePath);
-        //We read the file row-by-row to get the words we have to process
         Scanner s = new Scanner(new File(filePath));
         while (s.hasNext()) {
             words.add(s.next());

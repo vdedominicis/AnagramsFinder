@@ -7,7 +7,10 @@ import org.apache.log4j.Logger;
 class UtilsWithLogger {
 	
 	Logger logger = null;
-	
+
+	/**
+	 * @throws InvalidAttributesException If the logger is null
+	 */
 	public UtilsWithLogger(Logger logger) throws InvalidAttributesException {
 		if(logger == null) {
 			throw new InvalidAttributesException("The logger cannot be null");

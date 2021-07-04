@@ -10,30 +10,25 @@ import javax.naming.directory.InvalidAttributesException;
 import org.apache.log4j.Logger;
 
 /**
- * This class is a toolset to manage single words and groups of anagrams. 
- * It provides some functions to process a single word or a group of anagrams
+ * This class is a toolbox for managing single words and groups of anagrams.
  *
  * @author Valerio De Dominicis
  * @version 1.0
  */
 class AnagramsUtils extends UtilsWithLogger{
 	
-	
 	//This map is initialized only once when an instance of AnagramUtils is created. It provides
 	//the prime number associated to each letter in the alphabet
 	private Map<Character, Long> lettersValues;
 	
 	/**
-	 * Default constructor. It initialize the state of the instance
 	 * @throws InvalidAttributesException If the logger is null
 	 */
 	public AnagramsUtils(Logger logger) throws InvalidAttributesException {
 		
 		super(logger);
 		
-		//We associate to each letter a different prime number. 
-		//value 1, even if it is not a prime number, 
-		//is used to represent the empty or non-esisting word
+		//A specific prime number is associated to each letter. The value 1 is used for representing the empty word ("") or the non-existing one (null)
 		lettersValues = new HashMap<Character, Long>();
 		lettersValues.put('a', (long)2);
 		lettersValues.put('b', (long)3);
@@ -64,10 +59,11 @@ class AnagramsUtils extends UtilsWithLogger{
 	}
 	
 	/**
-	 * Return the numeric value associated to a word.
-	 * The value associated to a word is obtained multiplying the prime numbers associated to the word's letters. 
-	 * For instance, if we have the word "ab" and the associations
-	 * a -> 2 and b->3, this method will return 6 
+	 * Return the numeric value associated to a word. The value associated to a word is obtained by multiplying the prime numbers associated to the word's letters. 
+	 * For instance, if we have the word "ab" and the associations 
+	 * a -> 2 
+	 * b -> 3
+	 * The word value will be 6 
 	 *  
 	 * @param word The word to process
 	 * @return the numeric value associated to the word
@@ -82,7 +78,7 @@ class AnagramsUtils extends UtilsWithLogger{
 		
 		logger.debug("AnagramUtils - getValue - Calculating the value for the word : " + word);
 		
-		//We multiply the values associated to the word's letters to determine the word value
+		//The word values is calculated
 		for(char singleChar : word.toLowerCase().trim().toCharArray()) {
 			wordValue = wordValue * lettersValues.get(singleChar);
 		}
@@ -93,19 +89,10 @@ class AnagramsUtils extends UtilsWithLogger{
 	/**
 	 * This method process a list of words and split it into anagrams sublists.
 	 * 
-	 * @param words The words we want to process
+	 * @param words The list of words of interest
 	 * @return A collection containing lists of anagrams
 	 */
 	public Collection<List<String>> findAnagrams(List<String> words) {
-		
-		/*
-		 * To determine if two words are mutual anagrams we apply a mathematical method based on prime numbers.
-		 * We assign to each letter in the alphabet a different prime number. This allow us to associate a 
-		 * "word value" to each word, which is calculated multiplying the numbers associated to its letters. 
-		 * If two words are mutual anagrams they will have the same word value. 
-		 *
-		 * The unique factorization theorem guarantee that two non-anagrams words can't have the same word value.
-		 */
 		
 		Map<Long, List<String>> valueToAnagrams = new HashMap<Long, List<String>>();
 		
@@ -115,22 +102,27 @@ class AnagramsUtils extends UtilsWithLogger{
 		
 		this.logger.debug("AnagramUtils - findAnagrams - Processing the words");
 		
+		//The anagrams are spotted comparing the different words values (check method "getValue"). 
+		//If two words has the same word value then they are anagrams of each other.
+		
 		Long currentWordValue = null;
 		for(String currentWord : words) {
-			//For each word we determine its value
+
 			currentWordValue = this.getValue(currentWord);
 			
+			//In case the word value is 1, then the word is invalid (empty or not existing). Thus, is ignored.
 			if(currentWordValue == 1)
 				continue;
 			
-			//We group the words with same word value. If a new value is found we create a new group
-			if(!valueToAnagrams.containsKey(currentWordValue)) {
+			//The words with the same value are grouped.
+			if(valueToAnagrams.containsKey(currentWordValue)) {
+				valueToAnagrams.get(currentWordValue).add(currentWord);
+			}
+			// If a new value is found a new group is created
+			else {
 				List<String> anagrams = new LinkedList<String>();
 				anagrams.add(currentWord);
 				valueToAnagrams.put(currentWordValue, anagrams);
-			}
-			else {
-				valueToAnagrams.get(currentWordValue).add(currentWord);
 			}
 			
 		}
@@ -140,14 +132,10 @@ class AnagramsUtils extends UtilsWithLogger{
 	}
 	
 	/**
-	 * Return the concatenation of a list of strings
-	 * This method merge together all the strings contained in a list. The single strings are separated by spaces
-	 * 
-	 * @param anagrams The list of strings we want to merge
-	 * @return A string which is the concatenation of all the strings into the list
+	 * Given a list of strings, this method join them in a single string using the specified separator
 	 */
-	public String toString(List<String> anagrams) {
-		StringJoiner joiner = new StringJoiner(",");
+	public String toString(List<String> anagrams, String separator) {
+		StringJoiner joiner = new StringJoiner(separator);
 		
 		//We create a single string which contains all the words through a joiner 
 		anagrams.stream().forEach(anagram -> joiner.add(anagram));		
