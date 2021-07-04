@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
-import org.apache.maven.anagrams.AnagramsUtils;
 
 /**
  * The test class for the AnagramsUtils Class.
@@ -35,7 +34,7 @@ public class AnagramsUtilsTest {
 	 */
 	@Test
 	public void getWordValueTestEmptyWord() {
-		assertEquals(new Long(1).longValue(), anagramUtils.getValue("").longValue());
+		assertEquals((long)1, anagramUtils.getValue("").longValue());
 	}
 	
 	/**
@@ -43,7 +42,7 @@ public class AnagramsUtilsTest {
 	 */
 	@Test
 	public void getWordValueTestNullWord() {
-		assertEquals(new Long(1).longValue(), anagramUtils.getValue(null).longValue());
+		assertEquals((long)1, anagramUtils.getValue(null).longValue());
 	}
 	
 	/**
@@ -51,7 +50,7 @@ public class AnagramsUtilsTest {
 	 */
 	@Test
 	public void getWordValueTestArbitraryWord() {
-		assertEquals(new Long(30).longValue(), anagramUtils.getValue("abc").longValue());
+		assertEquals((long)30, anagramUtils.getValue("abc").longValue());
 	}
 
 	/**
@@ -99,7 +98,7 @@ public class AnagramsUtilsTest {
 		words.add("race");
 		words.add("care");
 		words.add("acre");
-		assertEquals("race care acre", anagramUtils.toString(words));
+		assertEquals("race,care,acre", anagramUtils.toString(words));
 	}
 	
 }

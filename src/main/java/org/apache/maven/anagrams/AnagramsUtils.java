@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -33,7 +35,7 @@ public class AnagramsUtils {
 		//value 1, even if it is not a prime number, 
 		//is used to represent the empty or non-esisting word
 		lettersValues = new HashMap<Character, Long>();
-		lettersValues.put('a', (long) 2);
+		lettersValues.put('a', (long)2);
 		lettersValues.put('b', (long)3);
 		lettersValues.put('c', (long)5);
 		lettersValues.put('d', (long)7);
@@ -118,7 +120,6 @@ public class AnagramsUtils {
 			//For each word we determine its value
 			currentWordValue = this.getValue(currentWord);
 			
-			//The value 1 is used to represent the empty (word = "") or the unexisting (word = null) words, which are both invalid
 			if(currentWordValue == 1)
 				continue;
 			
@@ -146,12 +147,12 @@ public class AnagramsUtils {
 	 * @return A string which is the concatenation of all the strings into the list
 	 */
 	public String toString(List<String> anagrams) {
-		String[] mergedAnagrams = {""};
+		StringJoiner joiner = new StringJoiner(",");
 		
-		//We iterate on the anagrams merging them all together in a single strings
-		anagrams.stream().forEach(anagram -> mergedAnagrams[0] += anagram + " ");		
+		//We create a single string which contains all the words through a joiner 
+		anagrams.stream().forEach(anagram -> joiner.add(anagram));		
 		
-		return mergedAnagrams[0].trim();
+		return joiner.toString();
 	}
 	
 }
