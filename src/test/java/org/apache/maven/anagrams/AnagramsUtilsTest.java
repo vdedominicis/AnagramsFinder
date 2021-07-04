@@ -62,6 +62,7 @@ public class AnagramsUtilsTest {
 	@Test
 	public void noExceptionAreThrownIfNoWordsAreProvided() {
 		assertEquals(0, anagramUtils.findAnagrams(null).size());
+		assertEquals(0, anagramUtils.findAnagrams(new LinkedList<String>()).size());
 	}
 	
 	/**
@@ -84,9 +85,7 @@ public class AnagramsUtilsTest {
 	@Test
 	public void anagramsGroupShouldBeCreated() {
 		List<String> words = new LinkedList<String>();
-		
-		//Empty set - 0 groups
-		assertEquals(0, anagramUtils.findAnagrams(words).size());
+
 		//Only one word - 1 group
 		words.add("word");
 		assertEquals(1, anagramUtils.findAnagrams(words).size());
