@@ -12,7 +12,7 @@ import org.junit.runner.notification.Failure;
  * @author valerio
  * @version 1.0
  */
-public class TestRunner {
+public class TestLauncher {
 	
 	/**
 	 * The launcher of the program.
