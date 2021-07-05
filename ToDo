@@ -1,0 +1,2 @@
+Use Optionals for wrapping the words, thus the invalid ones will be represented with an Optional.empty(). Easier that empty string or null values.
+Refine the .gitignore. exclude all the useless file
